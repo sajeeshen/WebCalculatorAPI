@@ -22,4 +22,11 @@ class UserAdmin(BaseUserAdmin):
     )
 
 
+class OperationAdmin(admin.ModelAdmin):
+    """ Adding extra fields to Category listings"""
+    list_display = ('operation_name', 'admin_required', )
+
+
 admin.site.register(models.User, UserAdmin)
+admin.site.register(models.Operation, OperationAdmin)
+admin.site.register(models.Report)

@@ -6,7 +6,7 @@ from rest_framework.test import APIClient
 from rest_framework import status
 
 
-CREATE_USER_URL = reverse('user:create')
+CREATE_USER_URL = reverse('user:user-register')
 TOKEN_URL = reverse('user:token')
 ME_URL = reverse('user:profile')
 
@@ -104,7 +104,7 @@ class PrivateUserApiTests(TestCase):
 
     def setUp(self):
         self.user = create_user(
-            email='test@test.com',
+            email='privateuser@test.com',
             password='testpass',
             full_name='First Name',
         )
