@@ -17,6 +17,10 @@ services:
     - DB_NAME=app
     - DB_USER=postgres
     - DB_PASS=supersecretpassword
+    links:
+      - db
+      - rabbit
+      - redis
     depends_on:
       - db
   db:
@@ -25,3 +29,33 @@ services:
       - POSTGRES_DB=app
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=supersecretpassword
+  # Redis
+  redis:
+    image: redis:2.8.19
+    hostname: redis
+
+  # RabbitMQ
+  rabbit:
+    hostname: rabbit
+    image: rabbitmq:3.7.17
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=mypass
+    ports:
+      - "5462:5462"
+      - "15672:15672"
+  # Celery worker
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: >
+      sh -c "report_builder_scheduled.tasks.report_builder_check_if_scheduled_report"
+    volumes:
+      - ./app:/app
+    links:
+      - db
+      - rabbit
+      - redis
+    depends_on:
+      - rabbit

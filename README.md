@@ -6,7 +6,6 @@ Clone the git and go the the app folder and run the
 following command 
 
 ```bash
-Docker build .
 docker-compose build 
 ```
 

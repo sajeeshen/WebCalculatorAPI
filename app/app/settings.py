@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 
+
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -42,6 +44,8 @@ INSTALLED_APPS = [
     'drf_yasg',
     'calculator',
     'user',
+    'report_builder',
+
 ]
 
 MIDDLEWARE = [
@@ -54,7 +58,11 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-REST_FRAMEWORK = { 'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema' }
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
+    # 'DEFAULT_AUTHENTICATION_CLASSES': 'rest_framework.authentication.SessionAuthentication',
+
+}
 
 
 ROOT_URLCONF = 'app.urls'
@@ -70,13 +78,17 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.static',
+                'django.template.context_processors.media',
             ],
         },
     },
 ]
 
 WSGI_APPLICATION = 'app.wsgi.application'
-
+REPORT_BUILDER_ASYNC_REPORT = True
+REPORT_BUILDER_GLOBAL_EXPORT = True
+# REPORT_BUILDER_INCLUDE = ['calculator.report']
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
@@ -137,3 +149,6 @@ STATICFILES_DIRS = (
 )
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+
+BROKER_URL = 'amqp://admin:mypass@mq:5462/'

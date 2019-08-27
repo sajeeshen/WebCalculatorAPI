@@ -1,5 +1,4 @@
 from rest_framework import serializers
-from rest_framework import mixins
 from calc.utility import get_available_options
 from calculator.models import Report
 

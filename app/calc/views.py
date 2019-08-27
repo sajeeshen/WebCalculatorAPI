@@ -8,7 +8,6 @@ from rest_framework.authentication import TokenAuthentication
 from calc.utility import get_available_options
 from calc.utility import do_calculation
 from calc.permissions import IsSuperUser
-from calculator.models import Report
 
 ACCESS_ERROR = _("You dont have permission for this operation")
 

@@ -50,6 +50,7 @@ class Operation(models.Model):
     def __str__(self):
         return self.operation_name
 
+
 class ReportManager(models.Manager):
 
     def create_report(self, action_name, action_parameter,
@@ -58,6 +59,7 @@ class ReportManager(models.Manager):
                              action_parameter=action_parameter,
                              user=user)
         return report
+
 
 class Report(models.Model):
     """ Model for Report"""
@@ -71,4 +73,3 @@ class Report(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     objects = ReportManager()
-

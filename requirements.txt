@@ -6,3 +6,8 @@ uritemplate>=3.0.0
 flake8>=3.6.0,<3.7.0
 drf-yasg
 packaging
+celery>=4.3.0
+redis>=2.3.0
+django-celery-results
+django_celery_beat
+django-report-builder
