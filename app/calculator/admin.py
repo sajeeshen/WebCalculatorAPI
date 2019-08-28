@@ -27,6 +27,17 @@ class OperationAdmin(admin.ModelAdmin):
     list_display = ('operation_name', 'admin_required', )
 
 
+class ReportAdmin(admin.ModelAdmin):
+    """ Adding extra fields to Category listings"""
+    list_display = ('action_name', 'action_parameter', 'user', 'created_at')
+
+    def get_readonly_fields(self, request, obj=None):
+        if obj:
+            return ('updated_at',)
+        else:
+            return ('')
+
+
 admin.site.register(models.User, UserAdmin)
 admin.site.register(models.Operation, OperationAdmin)
-admin.site.register(models.Report)
+admin.site.register(models.Report, ReportAdmin)

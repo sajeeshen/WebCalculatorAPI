@@ -1,4 +1,5 @@
 import math
+from datetime import datetime
 
 AVAILABLE_ACTIONS = [{'action': 'add', 'admin_required': False,
                       'operator': '+'},
@@ -43,3 +44,17 @@ def do_calculation(action, x, y):
         'sqrt': lambda x, y: math.sqrt(int(x))
     }
     return ops[operator](int(x), int(y))
+
+
+def get_current_month():
+    now = datetime.now()
+    return now.month
+
+
+def get_current_year():
+    now = datetime.now()
+    return now.year
+
+
+def get_current_date():
+    return datetime.now().date()

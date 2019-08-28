@@ -1,8 +1,8 @@
 from django.db import models
-from django.contrib.postgres.fields import JSONField
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, \
                                        PermissionsMixin
 from django.conf import settings
+
 
 
 class UserManager(BaseUserManager):
@@ -64,12 +64,12 @@ class ReportManager(models.Manager):
 class Report(models.Model):
     """ Model for Report"""
     action_name = models.CharField(max_length=100)
-    action_parameter = JSONField()
+    action_parameter = models.CharField(max_length=100)
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         related_name='requested_user'
     )
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     objects = ReportManager()

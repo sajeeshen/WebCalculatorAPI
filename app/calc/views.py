@@ -56,3 +56,17 @@ class Calculator(generics.GenericAPIView):
         else:
             return Response(serializer.errors,
                             status=status.HTTP_400_BAD_REQUEST)
+
+
+class DailyReportView(generics.GenericAPIView):
+    """
+    This is the Generic API for calculator
+    ---
+    x : First Number
+    y : Second Number
+    action : Can be Add/Sub/Mul
+
+    """
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated,)
+    serializer_class = serializers.ReportManageSerializer

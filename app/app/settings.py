@@ -12,8 +12,6 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 
-
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -27,7 +25,7 @@ SECRET_KEY = 'z&ag-+y$wji$c9l5mz=fx^jprj2fef42gjr@3ihs!)$iayc@g6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -41,10 +39,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken',
+    'rest_framework_swagger',
     'drf_yasg',
     'calculator',
     'user',
-    'report_builder',
+    'django_celery_beat',
+    'django_celery_results',
+    'reports',
+
 
 ]
 
@@ -60,7 +62,11 @@ MIDDLEWARE = [
 
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
-    # 'DEFAULT_AUTHENTICATION_CLASSES': 'rest_framework.authentication.SessionAuthentication',
+    'DEFAULT_PARSER_CLASSES': [
+        'rest_framework.parsers.FormParser',
+        'rest_framework.parsers.MultiPartParser',
+        'rest_framework.parsers.JSONParser',
+    ],
 
 }
 
@@ -102,6 +108,13 @@ DATABASES = {
         'PASSWORD': os.environ.get('DB_PASS')
     }
 }
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'apikey'
+EMAIL_HOST_PASSWORD = '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'
 
 
 # Password validation
@@ -151,4 +164,3 @@ STATICFILES_DIRS = (
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
-BROKER_URL = 'amqp://admin:mypass@mq:5462/'

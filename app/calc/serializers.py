@@ -33,3 +33,9 @@ class CalculatorSerializers(serializers.Serializer):
             raise serializers.ValidationError("Cant process, "
                                               "please check the input")
         return data
+
+
+class ReportManageSerializer(serializers.Serializer):
+    x = serializers.IntegerField()
+    y = serializers.IntegerField()
+    action = serializers.CharField()
