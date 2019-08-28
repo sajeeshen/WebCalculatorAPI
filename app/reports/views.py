@@ -67,7 +67,6 @@ class MonthlyReportView(ReportGenerateMixin,
                         generics.GenericAPIView):
     """
         Generate Monthly Report.
-        par
     """
 
     authentication_classes = (TokenAuthentication,)
@@ -95,7 +94,7 @@ class MonthlyReportView(ReportGenerateMixin,
 class YearlyReportView(ReportGenerateMixin,
                        generics.GenericAPIView):
     """
-        Yearly Monthly Report.
+        Yearly  Report.
         ____
 
     """
